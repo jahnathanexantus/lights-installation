@@ -1,0 +1,621 @@
+<title>Orlando Illumination Specialists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,900;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --sky-deep:#0f1626;
+    --sky-deeper:#0a0f1c;
+    --sky-dusk:#3d3260;
+    --sky-mid:#7a5a6e;
+    --ember:#f0a84e;
+    --ember-soft:#f7c988;
+    --ember-dim:#c98a44;
+    --palm:#1f4a3c;
+    --palm-light:#2f6b56;
+    --cream:#f6efe0;
+    --cream-dim:#c9c0ac;
+    --brick:#b96a52;
+    --line:rgba(246,239,224,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sky-deeper);
+    color:var(--cream);
+    font-family:'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-inline:0;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', ui-serif, Georgia, serif;
+    text-wrap:balance;
+    margin:0;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1120px;
+    margin-inline:auto;
+    padding-inline:24px;
+  }
+  @media (min-width:720px){
+    .wrap{padding-inline:40px;}
+  }
+
+  .eyebrow{
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ember-soft);
+    font-weight:600;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--ember);
+    color:var(--sky-deeper);
+    font-weight:700;
+    font-size:1rem;
+    padding:14px 26px;
+    border-radius:999px;
+    text-decoration:none;
+    border:1px solid var(--ember);
+    transition:transform .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{background:var(--ember-soft); transform:translateY(-1px);}
+  .btn:focus-visible{outline:3px solid var(--cream); outline-offset:2px;}
+  .btn-ghost{
+    background:transparent;
+    color:var(--cream);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{background:rgba(246,239,224,0.08); color:var(--cream);}
+  .btn svg{width:18px;height:18px;flex:none;}
+
+  /* ---------- sticky bar ---------- */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(10,15,28,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding-block:12px;
+  }
+  .brandmark{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:700; font-size:1.05rem;}
+  .brandmark svg{width:30px;height:30px;flex:none;}
+  .topbar .btn{padding:10px 18px; font-size:0.92rem;}
+  .topbar-name{display:none;}
+  @media (min-width:560px){.topbar-name{display:inline;}}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:linear-gradient(180deg, var(--sky-dusk) 0%, var(--sky-mid) 55%, var(--sky-deep) 100%);
+    padding-block:64px 56px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .wrap{
+    display:grid;
+    gap:40px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:900px){
+    .hero .wrap{grid-template-columns:1.05fr 1fr; align-items:center;}
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 4.6vw, 3.4rem);
+    line-height:1.05;
+    margin-block:14px 18px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--ember-soft);
+  }
+  .hero p.sub{
+    font-size:1.1rem;
+    color:var(--cream);
+    max-width:34ch;
+    margin:0 0 26px;
+    line-height:1.5;
+  }
+  .hero .ctaRow{display:flex; flex-wrap:wrap; gap:14px; align-items:center;}
+  .trustline{
+    margin-top:20px;
+    font-size:0.88rem;
+    color:var(--cream-dim);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+  }
+  .trustline span{display:flex; align-items:center; gap:6px;}
+  .trustline svg{width:14px;height:14px; color:var(--ember-soft); flex:none;}
+
+  .scene{
+    width:100%;
+    aspect-ratio:560/460;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(246,239,224,0.18);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,0.6);
+    position:relative;
+  }
+  .scene svg{width:100%; height:100%; display:block;}
+  .scene img{width:100%; height:100%; object-fit:cover; display:block;}
+  .scene .scene-tag{
+    position:absolute; bottom:14px; left:14px;
+    background:rgba(15,22,38,0.72);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(246,239,224,0.2);
+    color:var(--cream);
+    font-size:0.78rem;
+    padding:6px 12px;
+    border-radius:999px;
+  }
+
+  /* ---------- showcase (real install photos) ---------- */
+  .showcase{
+    display:grid;
+    gap:20px;
+    grid-template-columns:1fr;
+    margin-top:36px;
+  }
+  @media (min-width:720px){
+    .showcase{grid-template-columns:1fr 1fr;}
+  }
+  .showcase figure{
+    margin:0;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid rgba(246,239,224,0.16);
+    background:rgba(246,239,224,0.05);
+  }
+  .showcase img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    display:block;
+  }
+  .showcase figcaption{
+    padding:16px 18px;
+    font-size:0.92rem;
+    color:var(--cream-dim);
+  }
+  .showcase figcaption strong{
+    display:block;
+    color:var(--cream);
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.02rem;
+    margin-bottom:4px;
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .twinkle{animation:twinkle 3.2s ease-in-out infinite;}
+    .twinkle.d2{animation-delay:.4s;}
+    .twinkle.d3{animation-delay:.9s;}
+    .twinkle.d4{animation-delay:1.4s;}
+    .twinkle.d5{animation-delay:1.9s;}
+    .twinkle.d6{animation-delay:2.3s;}
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:1;}
+    50%{opacity:.45;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding-block:64px;}
+  .band-palm{background:var(--palm);}
+  .band-deep{background:var(--sky-deep);}
+  .band-deeper{background:var(--sky-deeper);}
+
+  .section-head{max-width:56ch; margin-bottom:40px;}
+  .section-head h2{font-size:clamp(1.7rem,3.2vw,2.3rem); margin-top:10px;}
+  .section-head p{color:var(--cream-dim); font-size:1.02rem; margin-top:12px; line-height:1.55;}
+
+  /* ---------- why choose us ---------- */
+  .benefits{
+    display:grid;
+    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  }
+  .benefit{
+    background:rgba(246,239,224,0.06);
+    border:1px solid rgba(246,239,224,0.14);
+    border-radius:14px;
+    padding:26px 22px;
+  }
+  .benefit .icn{
+    width:38px;height:38px;
+    color:var(--ember-soft);
+    margin-bottom:16px;
+  }
+  .benefit h3{font-size:1.1rem; font-family:'Hanken Grotesk',sans-serif; font-weight:700; margin-bottom:8px;}
+  .benefit p{margin:0; color:var(--cream-dim); font-size:0.95rem; line-height:1.5;}
+
+  /* ---------- process (light string timeline) ---------- */
+  .timeline{
+    position:relative;
+    display:grid;
+    gap:36px;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:820px){
+    .timeline{grid-template-columns:repeat(4,1fr);}
+    .timeline::before{
+      content:"";
+      position:absolute;
+      top:17px; left:0; right:0;
+      height:2px;
+      background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px);
+    }
+  }
+  .step{position:relative; padding-top:0;}
+  @media (min-width:820px){.step{padding-top:46px;}}
+  .bulb{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--ember);
+    box-shadow:0 0 0 6px rgba(240,168,78,0.16), 0 0 22px rgba(240,168,78,0.55);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--sky-deeper);
+    font-family:'Fraunces',serif; font-weight:700; font-size:0.95rem;
+    margin-bottom:16px;
+  }
+  @media (min-width:820px){
+    .bulb{position:absolute; top:0; left:0;}
+  }
+  .step h3{font-size:1.05rem; font-family:'Hanken Grotesk',sans-serif; font-weight:700; margin-bottom:8px;}
+  .step p{margin:0; color:var(--cream-dim); font-size:0.92rem; line-height:1.5;}
+
+  /* ---------- testimonial ---------- */
+  .quote-card{
+    background:linear-gradient(160deg, rgba(185,106,82,0.18), rgba(246,239,224,0.05));
+    border:1px solid rgba(246,239,224,0.16);
+    border-radius:18px;
+    padding:40px clamp(24px,5vw,52px);
+    max-width:760px;
+  }
+  .quote-mark{
+    font-family:'Fraunces',serif;
+    font-size:3.6rem;
+    color:var(--brick);
+    line-height:1;
+    display:block;
+    margin-bottom:6px;
+  }
+  .quote-card p.qtext{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.15rem,2.4vw,1.5rem);
+    font-weight:500;
+    line-height:1.45;
+    margin:0 0 22px;
+  }
+  .qmeta{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+  .qmeta .who{font-weight:600;}
+  .qmeta .where{color:var(--cream-dim); font-size:0.9rem;}
+  .bulbrow{display:flex; gap:5px;}
+  .bulbrow svg{width:16px;height:16px; color:var(--ember-soft);}
+
+  /* ---------- reviews grid ---------- */
+  .reviews-grid{
+    display:grid;
+    gap:18px;
+    grid-template-columns:1fr;
+    max-width:1040px;
+    margin:36px auto 0;
+  }
+  @media (min-width:640px){
+    .reviews-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (min-width:1020px){
+    .reviews-grid{grid-template-columns:repeat(4,1fr);}
+  }
+  .review-card{
+    background:rgba(246,239,224,0.05);
+    border:1px solid rgba(246,239,224,0.14);
+    border-radius:14px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .review-card .bulbrow svg{width:13px;height:13px;}
+  .review-card p{
+    margin:0;
+    font-size:0.92rem;
+    line-height:1.5;
+    color:var(--cream);
+    flex-grow:1;
+  }
+  .review-who{font-size:0.84rem; color:var(--cream-dim);}
+  .review-who strong{color:var(--cream); font-weight:600;}
+  .reviews-note{
+    text-align:center;
+    max-width:1040px;
+    margin:22px auto 0;
+    font-size:0.78rem;
+    color:rgba(201,192,172,0.6);
+  }
+
+  /* ---------- social ---------- */
+  .social-grid{
+    display:grid;
+    gap:40px;
+    grid-template-columns:1fr;
+    align-items:center;
+  }
+  @media (min-width:820px){
+    .social-grid{grid-template-columns:1fr 1fr;}
+  }
+  .mark-display{
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(246,239,224,0.05);
+    border:1px solid rgba(246,239,224,0.14);
+    border-radius:18px;
+    padding:40px;
+  }
+  .mark-display svg{width:140px; height:140px;}
+  .social-copy p{color:var(--cream-dim); line-height:1.6; margin:14px 0 24px; max-width:44ch;}
+  .icon-row{display:flex; gap:12px;}
+  .icon-btn{
+    width:46px; height:46px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:1px solid var(--line);
+    color:var(--cream);
+    text-decoration:none;
+  }
+  .icon-btn:hover{background:rgba(246,239,224,0.08);}
+  .icon-btn svg{width:20px;height:20px;}
+  .handle{font-size:0.88rem; color:var(--cream-dim); margin-top:14px;}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--sky-deeper);
+    border-top:1px solid var(--line);
+    padding-block:36px;
+  }
+  footer .wrap{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;
+  }
+  footer .brandmark{font-size:1rem;}
+  footer .foot-right{text-align:right; font-size:0.88rem; color:var(--cream-dim); line-height:1.6;}
+  footer .foot-right a{color:var(--ember-soft); font-weight:600; text-decoration:none;}
+  .fineprint{
+    margin-top:22px;
+    font-size:0.78rem;
+    color:rgba(201,192,172,0.6);
+  }
+</style>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brandmark">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="3.4"/>
+        <circle cx="20" cy="7" r="2.6" fill="currentColor"/>
+      </svg>
+      <span class="topbar-name">Orlando Illumination Specialists</span>
+    </div>
+    <a class="btn" href="tel:+16892051374">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (689) 205-1374
+    </a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Serving Greater Orlando, FL</p>
+      <h1>Spectacular holiday lights &mdash; <em>zero ladders</em> for you.</h1>
+      <p class="sub">Custom-designed, professionally installed displays for Orlando homes. We climb the roof, wrap the palms, and pack it all away when the season ends &mdash; you just flip the switch.</p>
+      <div class="ctaRow">
+        <a class="btn" href="tel:+16892051374">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Now &mdash; (689) 205-1374
+        </a>
+        <a class="btn btn-ghost" href="#process">See how it works</a>
+      </div>
+      <div class="trustline">
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>Free consultations</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>Fully insured crews</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>Takedown &amp; storage included</span>
+      </div>
+    </div>
+
+    <div class="scene">
+      <img src="icicle-house.jpg" alt="Orlando home with elegant warm-white icicle lights along the roofline at sunset">
+      <span class="scene-tag">An actual install &mdash; not a rendering</span>
+    </div>
+  </div>
+</section>
+
+<section class="band-palm">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The Difference</p>
+      <h2>Why Orlando homeowners call us first</h2>
+      <p>Every display is built for how homes actually live here &mdash; block parties, Florida humidity, and roofs that don't come with snow-covered excuses to skip a step.</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit">
+        <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        <h3>Professional design</h3>
+        <p>We plan every strand around your home's actual roofline and landscaping &mdash; not a generic kit stretched to fit.</p>
+      </div>
+      <div class="benefit">
+        <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l6-6"/><path d="M14 4l6 6-8.5 8.5-6-6z"/><path d="M17 7l-2.5-2.5"/></svg>
+        <h3>Stress-free installation</h3>
+        <p>Fully insured crews handle rooflines, arches, and palms so you never touch a ladder.</p>
+      </div>
+      <div class="benefit">
+        <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+        <h3>Takedown &amp; storage</h3>
+        <p>When the season's over, we remove everything on schedule and store it safely until next year.</p>
+      </div>
+      <div class="benefit">
+        <svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2 3 2 5 0 7-2-2-2-4 0-7z"/><path d="M12 10c3.5 0 6 1.5 7 4-3.5 1-6-.5-7-4z"/><path d="M12 10c-3.5 0-6 1.5-7 4 3.5 1 6-.5 7-4z"/><path d="M12 10v11"/></svg>
+        <h3>Built for Florida</h3>
+        <p>Palm wraps, color-wash façades, and humidity-rated fixtures &mdash; options most out-of-state companies don't offer.</p>
+      </div>
+    </div>
+
+    <div class="showcase">
+      <figure>
+        <img src="wreath-house.jpg" alt="Brick Orlando home with warm white roofline lights and a large lit wreath over the garage">
+        <figcaption><strong>Classic elegance</strong>Timeless warm-white rooflines and a statement wreath &mdash; our most-requested look.</figcaption>
+      </figure>
+      <figure>
+        <img src="color-house.jpg" alt="Home wrapped in red, white, and blue lights across the roofline, palm tree, and shrubs">
+        <figcaption><strong>Any color, any holiday</strong>The same wiring switches from Christmas white to a full-color display for July 4th, Halloween, or a big game night.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band-deep" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The Process</p>
+      <h2>Four steps, one phone call</h2>
+      <p>Here's exactly what happens between your call and your porch lighting up.</p>
+    </div>
+    <div class="timeline">
+      <div class="step"><div class="bulb">1</div><h3>Free consultation</h3><p>Call (689) 205-1374 and we'll walk your property, in person or over video.</p></div>
+      <div class="step"><div class="bulb">2</div><h3>Custom design</h3><p>We map a lighting plan around your home, your budget, and your must-haves.</p></div>
+      <div class="step"><div class="bulb">3</div><h3>Professional install</h3><p>Our crew installs everything before the season starts &mdash; you don't lift a finger.</p></div>
+      <div class="step"><div class="bulb">4</div><h3>Takedown</h3><p>After the holidays, we remove, pack, and store your display until next year.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-deeper">
+  <div class="wrap" style="display:flex; justify-content:center;">
+    <div class="quote-card">
+      <span class="quote-mark">&ldquo;</span>
+      <p class="qtext">Orlando Illumination Specialists transformed our house. It was effortless &mdash; they handled everything from design to cleanup. Our street looks forward to it every year!</p>
+      <div class="qmeta">
+        <div>
+          <div class="who">Dr. Phillips, Orlando, FL</div>
+          <div class="where">Homeowner, third season with us</div>
+        </div>
+        <div class="bulbrow" aria-label="5 out of 5 bulbs">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap" style="padding:0;">
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="bulbrow" aria-label="5 out of 5 bulbs">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <p>Booked in October and they were done before Thanksgiving. Crew was fast, careful with the landscaping, and cleaned up completely.</p>
+          <div class="review-who"><strong>Sarah T.</strong> &middot; Lake Nona, FL</div>
+        </div>
+        <div class="review-card">
+          <div class="bulbrow" aria-label="5 out of 5 bulbs">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <p>Our palm trees look incredible wrapped in lights &mdash; something no other company in the area would even attempt. Worth every penny.</p>
+          <div class="review-who"><strong>Marcus R.</strong> &middot; Winter Park, FL</div>
+        </div>
+        <div class="review-card">
+          <div class="bulbrow" aria-label="5 out of 5 bulbs">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <p>They took everything down the first week of January and stored it for us. One less thing to think about &mdash; we'll be lifetime customers.</p>
+          <div class="review-who"><strong>The Alvarez Family</strong> &middot; Windermere, FL</div>
+        </div>
+        <div class="review-card">
+          <div class="bulbrow" aria-label="5 out of 5 bulbs">
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <p>Same lights switched from white for Christmas to red and blue for the 4th of July. Didn't know that was even an option until they showed us.</p>
+          <div class="review-who"><strong>Jenny K.</strong> &middot; College Park, FL</div>
+        </div>
+      </div>
+      <p class="reviews-note">Example reviews shown for design purposes &mdash; replace with your real Google reviews before launch.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band-palm">
+  <div class="wrap social-grid">
+    <div class="mark-display">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Orlando Illumination Specialists mark">
+        <circle cx="100" cy="100" r="62" fill="none" stroke="#f6efe0" stroke-width="10"/>
+        <circle cx="100" cy="34" r="9" fill="#f0a84e"/>
+      </svg>
+    </div>
+    <div class="social-copy">
+      <p class="eyebrow">Follow the Glow</p>
+      <h2>See our latest Orlando installs</h2>
+      <p>Real homes we've lit this season, before-and-afters, and behind-the-scenes install days &mdash; posted through the season on Instagram and Facebook.</p>
+      <div class="icon-row">
+        <a class="icon-btn" href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a class="icon-btn" href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6H14v-6h2.6l.4-3H14V9.6c0-.4.2-.6.6-.6z"/></svg>
+        </a>
+      </div>
+      <p class="handle">@OrlandoIlluminationSpecialists &mdash; example handle, swap in your real one.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brandmark">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="3.4"/>
+        <circle cx="20" cy="7" r="2.6" fill="currentColor"/>
+      </svg>
+      Orlando Illumination Specialists
+    </div>
+    <div class="foot-right">
+      <a href="tel:+16892051374">(689) 205-1374</a><br>
+      Serving the greater Orlando, Florida area.
+    </div>
+  </div>
+  <div class="wrap fineprint">&copy; 2026 Orlando Illumination Specialists. Placeholder business name &mdash; replace with your own.</div>
+</footer>
